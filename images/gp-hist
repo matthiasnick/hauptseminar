@@ -1,0 +1,115 @@
+    1  plot 2*exp(x), 3*exp(x)
+    2  plot exp(1)+2*exp(x), 3*exp(x-1)
+    3  plot exp(x), exp(1)*exp(x-1)
+    4  set view map
+    5  quit
+    6  splot 'out' using 1:2:(0.0):3 with dots palette
+    7  quit
+    8  set view map
+    9  set zrange[0:1000]
+   10  splot 'out' using 1:2:(0.0):3 with dots palette
+   11  quit
+   12  set view map
+   13  splot 'out' using 1:2:(0.0):3 with dots palette
+   14  quit
+   15  splot 'out' using 1:2:(0.0):3 with dots palette
+   16  quit
+   17  set view map
+   18  splot 'out' using 1:2:(0.0):3 with dots palette
+   19  set view map
+   20  splot 'out' using 1:2:(0.0):3 with dots palette
+   21  set zrange[0:1000]
+   22  splot 'out' using 1:2:(0.0):3 with dots palette
+   23  set xrange [-0.25:0.25]
+   24  splot 'out' using 1:2:(0.0):3 with dots palette
+   25  set cbrange [0:1000]
+   26  set palette gray
+   27  replot
+   28  set palette defined ( 0 0 0 0, 0.5 0.5 0.5 0.5 )
+   29  replot
+   30  set palette defined ( 0 0 0 0, 0.8 0.8 0.8 0.8 )
+   31  replot
+   32  quit
+   33  set palette defined ( 0 0 0 0, 0.8 0.8 0.8 0.8 )
+   34  set cbrange [0:1000]
+   35  set cbrange [0:10000]
+   36  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+   37  set view map
+   38  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+   39  replot
+   40  replot
+   41  set output "v1_p.eps"
+   42  set terminal postscript eps
+   43  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+   44  set palette rgb 7,5,15
+   45  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+   46  reset
+   47  set output "v1_p.eps"
+   48  set terminal postscript eps
+   49  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+   50  set view map
+   51  replot
+   52  reset
+   53  set view map
+   54  set output "v1_p.eps"
+   55  set terminal postscript eps
+   56  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+   57  quit
+   58  set view map
+   59  set output "v1_p.eps"
+   60  set terminal postscript eps
+   61  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+   62  set terminal postscript eps enhanced color
+   63  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+   64  quit
+   65  set view map
+   66  set output "v1_p.eps"
+   67  set terminal postscript eps enhanced color
+   68  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+   69  quit
+   70  set view map
+   71  set output "v1_p.eps"
+   72  set terminal postscript eps enhanced color
+   73  set yrange [-0.4:0.4]
+   74  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+   75  set size 10,10
+   76  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+   77  quit
+   78  set view map
+   79  set output "v1_p.eps"
+   80  set terminal postscript eps enhanced color
+   81  set yrange [-0.4:0.4]
+   82  set size 10,10
+   83  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+   84  quit
+   85  set view map
+   86  set output "v1_p.eps"
+   87  set terminal postscript eps enhanced color
+   88  set yrange [-0.4:0.4]
+   89  set size 1,1
+   90  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+   91  quit
+   92  help
+   93  quit
+   94  q
+   95  q
+   96  set view map
+   97  set output "v1_p.eps"
+   98  set terminal postscript eps enhanced color
+   99  set yrange [-0.4:0.4]
+  100  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+  101  quit
+  102  set view map
+  103  set output "v1_p.eps"
+  104  set terminal postscript eps enhanced color
+  105  set yrange [-0.4:0.4]
+  106  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+  107  set size 10,10
+  108  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+  109  set size 1,1
+  110  splot 'v1_p.dat' using 1:2:(0.0):3 with dots palette
+  111  quit
+  112  quit
+  113  quit
+  114  history
+

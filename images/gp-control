@@ -1,0 +1,10 @@
+set view map
+set output "v2_t.eps"
+set terminal postscript eps enhanced color size 5,5
+set yrange [-0.2:0.2]
+set cbrange [200:1000]
+set size ratio -1
+set nokey
+splot 'v2_t.dat' using 1:2:(0.0):3 with dots palette
+quit
+
