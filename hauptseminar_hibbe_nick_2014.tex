@@ -1,0 +1,85 @@
+\documentclass [listof=totoc,bibliography=totoc,german,a4paper,titlepage] {scrartcl}
+
+\usepackage[english]{babel}
+\usepackage{setspace}
+\usepackage[paper=a4paper]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{subfigure}
+\usepackage{esvect}
+\usepackage{pstricks}
+\usepackage{floatflt}
+\usepackage{SIunits}
+\usepackage{amsopn}
+\usepackage[percent]{overpic}
+
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\onehalfspacing
+
+\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}
+\makeatletter \@addtoreset{figure}{section} \makeatother
+\renewcommand{\thetable}{\arabic{section}.\arabic{table}}
+\makeatletter \@addtoreset{table}{section} \makeatother
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+\makeatletter \@addtoreset{equation}{section} \makeatother
+
+\let\oldbibitem=\bibitem
+\renewcommand{\bibitem}{%
+\filbreak
+\oldbibitem
+}
+
+\newenvironment{changemargin}[2]{%
+  \begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{#1}%
+    \setlength{\rightmargin}{#2}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]}{\end{list}}
+
+
+\newenvironment{mylisting}
+{\begin{list}{}{\setlength{\leftmargin}{1em}}\item\scriptsize\bfseries}
+{\end{list}}
+
+\DeclareMathOperator{\grad}{grad}
+
+\makeatletter
+\let\divsymb\div              % make \IEEEendproof do same as \endproof
+\let\div\@undefined                  % undefine \endproof
+\makeatother
+
+\DeclareMathOperator{\div}{div}
+
+\begin{document}
+
+\include{title}
+\tableofcontents
+
+\pagebreak
+
+\include{introduction}
+\include{foundation}
+%\include{problemdefinition}
+%\include{approach}
+%\include{theory}
+%\include{algorithm}
+%\include{validation}
+%\include{cadconcept}
+%\include{summary}
+%\appendix
+%\include{usedsymbols}
+%\listoffigures
+%\newpage
+%\bibliographystyle{alphadin}
+%\bibliography{bachelorarbeit_nick_matthias}
+%\include{appendix}
+\end{document}
