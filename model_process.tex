@@ -4,17 +4,17 @@ This work deals with modeling of an open die forging process with multiple passe
 \subsection{Material data}
 The material used is a 1.4301 (X5CrNiMo18-10) stainless steel. It is an austenitic steel which contains high quantities of the alloying elements chrome and nickel (Table 1). Therefore it is non-corrosive, acid- and heat-resistant. The field of application is widely spread and reaches from the automotive industry up to the chemical industry \cite{1.4301}.\par
 
-The chemical composition (in weight-\%\) of the material is as follows \cite{metallograf.de}:\begin{table}
+The chemical composition (in weight-\%) of the material is as follows \cite{metallograf.de}:\begin{table}
  \centering
  \caption{Chemical composition of 1.4301}
- \begin{tabular}{|c|c|c|c|c|c|}
- &C[\%\]&Cr[\%\]&Ni[\%\]&Si[\%\]&Mn[\%\]&P[\%\]&S[\%\]&N[\%\]
+ \begin{tabular}{|c|c|c|c|c|c|c|c|}
+C[\%]&Cr[\%]&Ni[\%]&Si[\%]&Mn[\%]&P[\%]&S[\%]&N[\%]\\
  \hline
- &max 0,07/&17,00-19,50&8,00-10,50&max 1,00&max. 2,00&max 0,045&max 0,03&max 0,11
+max 0,07&17,00-19,50&8,00-10,50&max 1,00&max. 2,00&max 0,045&max 0,03&max 0,11\\
  \end{tabular}
 \end{table}\par
 
-For the input in a simulation model the thermal material data is crucial, containing are the temperature depending thermal conductivity, the spec. heat capacity and the Young´s modul, see Figure \ref{thermalconductivity}\ref{heatcapacity}\ref{youngsmodul}.\par 
+For the input in a simulation model the thermal material data is crucial, containing are the temperature depending thermal conductivity, the spec. heat capacity and the Young´s modul, see Figure \ref{img:thermalconductivity}, \ref{img:heatcapacity}, \ref{img:youngsmodul}.\par 
 
 \begin{figure}[!htbp]
  \centering
@@ -37,29 +37,29 @@ For the input in a simulation model the thermal material data is crucial, contai
  \label{img:youngsmodul}
 \end{figure}
 
-It is necessary that the data describes the whole temperature range of the process. Further parameters are set constant and are pictured in \ref{processparameter}\par 
+It is necessary that the data describes the whole temperature range of the process. Further parameters are set constant and are pictured in \ref{img:processparameter}\par 
 
 \begin{table}
  \centering
  \caption{Constant process parameters (reference temperature 20°C)}
  \begin{tabular}{|c|c|c|}
- &Poison&0,3&-
+ Poison&0,3&-\\
  \hline
- &Thermal expansion&0,000012&[1/K]
+ Thermal expansion&0,000012&[1/K]\\
  \hline
- &Emissivity&0,7&-
+ Emissivity&0,7&-\\
  \hline
- &Heat transfer coeff.&4,5&[W/(m²K)]
+ Heat transfer coeff.&4,5&[W/(m²K)]\\
  \hline
- &Friction coeff.&0,4&-
+ Friction coeff.&0,4&-\\
  \hline
- &Dissipation&0,9&\%\
+ Dissipation&0,9&\%\\
  \hline
  \end{tabular}
 \end{table}\par
 
 \subsection{Forging plan (ForgeBase)}
-The settings of the forging simulation are based on the calculation of the forging software ForgeBase. The simulations are done for a four passes process on a block (workpiece - WP) with the dimensions of 150mm in height as well as in width and 600mm in length. However, only 400mm of the length are forged. The rest is provided for the manipulator to hold and move the WP. The WP is set as a plastic solid and is meshed with a brick mesh with 12544 elements. The upper and lower dies are set as rigid object. The manipulator is set up as a spring with a stiffness of 175 N/mm and the maximum clamping force of 222,4 kN. For detailed dimensions of the upper and lower die, as of the manipulator see \ref{Appendix1}.\par 
+The settings of the forging simulation are based on the calculation of the forging software ForgeBase. The simulations are done for a four passes process on a block (workpiece - WP) with the dimensions of 150mm in height as well as in width and 600mm in length. However, only 400mm of the length are forged. The rest is provided for the manipulator to hold and move the WP. The WP is set as a plastic solid and is meshed with a brick mesh with 12544 elements. The upper and lower dies are set as rigid object. The manipulator is set up as a spring with a stiffness of 175 N/mm and the maximum clamping force of 222,4 kN. For detailed dimensions of the upper and lower die, as of the manipulator see \\ref{Appendix1}.\par 
 
 The passes in the simulation vary in height reduction and bite ratio. Between the passes the WP is rotated in positive and negative direction with 90° rotation angle. The bottom die is fixed, though the top die moves with a speed of 80mm/s.
 
@@ -74,17 +74,17 @@ The passes in the simulation vary in height reduction and bite ratio. Between th
  \centering
  \caption{Forging plan from ForgeBase}
  \begin{tabular}{|c|c|c|c|c|c|c|c|}
- &Pass Nr.&Reduction [mm]&Height 1[mm]&Width 1[mm]&Height 2[mm]&Width 2[mm]&Rotation [°]&Bite width [mm]
+ Pass Nr.&Reduction [mm]&Height 1[mm]&Width 1[mm]&Height 2[mm]&Width 2[mm]&Rotation [°]&Bite width [mm]\\
  \hline
- &0&0&150&150&150&150&0&0
+ 0&0&150&150&150&150&0&0\\
  \hline
- &1&28&122&162&122&162&0&105
+ 1&28&122&162&122&162&0&105\\
  \hline
- &2&30&132&132&132&132&90&85
+ 2&30&132&132&132&132&90&85\\
  \hline
- &3&25&107&143&107&143&-90&92
+ 3&25&107&143&107&143&-90&92\\
  \hline
- &4&27&116&116&116&116&90&75
+ 4&27&116&116&116&116&90&75\\
  \hline
  \end{tabular}
 \end{table}\par
