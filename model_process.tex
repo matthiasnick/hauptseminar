@@ -4,17 +4,17 @@ This work deals with modeling of an open die forging process with multiple passe
 \subsection{Material data}
 The material used is a 1.4301 (X5CrNiMo18-10) stainless steel. It is an austenitic steel which contains high quantities of the alloying elements chrome and nickel \ref{table:chemicalcomposition}. Therefore it is non-corrosive, acid- and heat-resistant. The field of application is widely spread and reaches from the automotive industry up to the chemical industry \cite{1.4301}.\par
 
-The chemical composition (in weight-\%\) of the material is as follows \cite{metallograf.de}:\begin{table}[!htbp][width=1\textwidth]
+The chemical composition (in weight-\%) of the material is as follows \cite{metallograf.de}:
+\begin{table}[!htbp]%[width=1.0\textwidth]
+ \footnotesize
  \centering
  \caption{Chemical composition of 1.4301}
  \begin{tabular}{|c|c|c|c|c|c|c|c|}
  \hline
- C[\%]&Cr[\%]&Ni[\%]&Si[\%]&Mn[\%]&P[\%]&S[\%]&N[\%]\\
- \hline
- max 0,07&17,00-19,50&8,00-10,50&max 1,00&max. 2,00&max 0,045&max 0,03&max 0,11
- \hline
- \label{table:chemicalcomposition}
+ C[\%]&Cr[\%]&Ni[\%]&Si[\%]&Mn[\%]&P[\%]&S[\%]&N[\%]\\\hline
+ max 0,07&17,00-19,50&8,00-10,50&max 1,00&max. 2,00&max 0,045&max 0,03&max 0,11\\\hline
  \end{tabular}
+ \label{table:chemicalcomposition}
 \end{table}\par
 
 For the input in a simulation model the thermal material data is crucial, containing are the temperature depending thermal conductivity, the spec. heat capacity and the Young´s modul, see Figure \ref{img:thermalconductivity}, \ref{img:heatcapacity}, \ref{img:youngsmodul}. 
@@ -42,7 +42,7 @@ For the input in a simulation model the thermal material data is crucial, contai
 
 It is necessary that the data describes the whole temperature range of the process. Further parameters are set constant and are pictured in \ref{table:processparameter}. 
 
-\begin{table}[!htbp][width=0.8\textwidth]
+\begin{table}[!htbp]%[width=0.8\textwidth]
  \centering
  \caption{Constant process parameters (reference temperature 20°C)}
  \begin{tabular}{|c|c|c|}
@@ -59,8 +59,8 @@ It is necessary that the data describes the whole temperature range of the proce
  \hline
  Dissipation&0,9&\%\\
  \hline
- \label{table:processparameter}
  \end{tabular}
+ \label{table:processparameter}
 \end{table}
 
 \subsection{Forging plan (ForgeBase)}
@@ -75,12 +75,14 @@ The passes in the simulation vary in height reduction and bite ratio. Between th
  \label{img:processsetup}
 \end{figure}
 
-\begin{table}[!htbp][width=1\textwidth]
+\begin{table}[!htbp]%[width=1\textwidth]
+ \footnotesize
  \centering
  \caption{Forging plan from ForgeBase}
  \begin{tabular}{|c|c|c|c|c|c|c|c|}
  \hline
- Pass Nr.&Reduction [mm]&Height 1[mm]&Width 1[mm]&Height 2[mm]&Width 2[mm]&Rotation [°]&Bite width [mm]\\
+ Pass Nr.&Reduction&Height 1&Width 1&Height 2&Width 2&Rotation&Bite width\\
+ & [mm] & [mm] & [mm] & [mm] & [mm] & [$^{\circ}$] & [mm]\\
  \hline
  0&0&150&150&150&150&0&0\\
  \hline
@@ -92,8 +94,8 @@ The passes in the simulation vary in height reduction and bite ratio. Between th
  \hline
  4&27&116&116&116&116&90&75\\
  \hline
- \label{table:forgingplan}
  \end{tabular}
+ \label{table:forgingplan}
 \end{table}
 
 Moreover, the heat treatment before and during the process is of great importance. Before the first pass starts, the WP gets heated up to 1200°C for 2 hours. It is vital, that the WP does have a homogeneous distribution. During the forging passes, heat is getting lost by the effects of emission and the heat transfers to the dies. Because of that, a second heat is necessary between the second and the third pass. The WP is heated up again to 1200°C within 1 hour. After the last pass the WP cools down upon air to room temperature.
