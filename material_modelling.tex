@@ -30,7 +30,7 @@ After or parallel to SRV and SRX, grain growth (GG) can take place. The driving 
  \label{img:recovandrecrystwarmforming}
 \end{figure}
 
-The flow curves \ref{img:flowcurves} are essential for the determination of the recrystallization kinetics and the fraction of recrystallized material. Therefore it is the basis for the creation of a microstructure model. At the IBF, flow curves are determined by isothermal compression tests at cylindrical specimens with an eight to diameter ratio of 1,5. For the 1.4301 tests have been carried out at temperatures ranging from 900 - 1250 °C and strain rates of 0,05 - 100 s-1 \ref{img:flowcurves}.
+The flow curves \ref{img:flowcurves} are essential for the determination of the recrystallization kinetics and the fraction of recrystallized material. Therefore it is the basis for the creation of a microstructure model. At the IBF, flow curves are determined by isothermal compression tests at cylindrical specimens with an eight to diameter ratio of 1,5. For the 1.4301 tests have been carried out at temperatures ranging from 900 - 1250 °C and strain rates of 0,05 - 100 s^{-1} \ref{img:flowcurves}.
 
 \begin{figure}[htbp]
  \centering
@@ -50,7 +50,7 @@ For the semi empirical material model given by Deghan Manshadi \cite{DEG08} the 
 
 They can also be calculated by:
 \begin{equation}
- \varepsilon_{p} = 3,6\cdot10^{-3}d_{0^{0}}\cdot Z^{0,15}
+ \varepsilon_{p} = 3,6\cdot10^{-3}d_{0}^{0}\cdot Z^{0,15}
 \end{equation}
 
 \begin{equation}
@@ -58,13 +58,13 @@ They can also be calculated by:
 \end{equation}
 
 \begin{equation}
- \varepsilon_{ss} = 0,00598\cdot d_{0^{0}}\cdot Z^{0,1536}
+ \varepsilon_{ss} = 0,00598\cdot d_{0}^{0}\cdot Z^{0,1536}
 \end{equation}
 
 \subsection{Semi emprirical material models}
 For the prediction of microstructural evolution semi-empirical models are used for many years. Lohmar and Karhausen gave a detailed overlook over the common models used in warm forming \cite{LOH10}\cite{KAR94}.\par 
 
-The JMAK-equation is a way to calculate the fraction of recrystallization X \ref{img:JMAK} for the different recrystallization mechanisms DRX and SRX. In this work the equation for the calculation of DRX and SRX published by Dehgan Manshadi is used \cite{DEG08}.
+The JMAK-equation is a way to calculate the fraction of recrystallization X \ref{img:JMAK} for the different recrystallization mechanisms DRX and SRX. In this work the equation for the calculation of DRX and SRX published by Dehgan Manshadi is used \cite{DEH08}.
 
 \begin{equation}
  X = 1 - exp\left( log\left( 1-0,95\right) \cdot\left( \frac{\varepsilon_{eff}-\varepsilon_{c}}{\varepsilon_{x}}\right) ^{1,3}\right)
@@ -74,26 +74,26 @@ The JMAK-equation is a way to calculate the fraction of recrystallization X \ref
  X = 1 - exp\left( log\left( 1-0,5\right) \cdot\left( \frac{t_{SRX}}{t_{50}}\right) ^{1,1}\right)
 \end{equation}
 
-Where t50 is the time where 50\%\ softening took place:
+Where t_{50} is the time where 50\%\ recrystallization took place \ref{img:JMAK}:
 
 \begin{equation}
- t_50 = 8\cdot10^{-9}\varepsilon^{-1,5}\cdot Z^{-0,42}exp\left( \frac{375000}{R\cdot T}\right)
+ t_{50} = 8\cdot10^{-9}\varepsilon^{-1,5}\cdot Z^{-0,42}exp\left( \frac{375000}{R\cdot T}\right)
 \end{equation}
 
 \begin{figure}[htbp]
  \centering
  \includegraphics[width=0.8\textwidth]{images/JMAK}
- \caption{Fraction of recrysrallization X \cite{GOT07}}
+ \caption{Fraction of recrysrallization X}
  \label{img:JMAK}
 \end{figure}
 
-A lot of these models relate the stress behavior to the strain rate $\dot{\varepsilon}$ and the Temperature. A popular way to describe this is given by the Zener-Hollomon parameter Z \cite{ZEN44}:
+A lot of these models relate the stress behavior to the strain rate $\dot{\varepsilon}$ and the Temperature T. A popular way to describe this is given by the Zener-Hollomon parameter Z \cite{ZEN44}:
 
 \begin{equation}
  Z =  \varepsilon\cdot exp\left( \frac{Q}{R\cdot T}\right)
 \end{equation}
 
-These equations lead to the determination of the grain size $d_{DRX}$ and $d_{SRX}$ \cite{DEG08}:
+These equations lead to the determination of the grain size $d_{DRX}$ and $d_{SRX}$ \cite{DEH08}:
 
 \begin{equation}
  d_{DRX} =  5916\cdot Z^{-0,1748}
