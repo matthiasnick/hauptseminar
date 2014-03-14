@@ -1,10 +1,80 @@
 \section{Validation}
 
-For the modelling of the described process, different software packages are available. Specifically, DEFORM-3D from Scientific Forming Technologies Corporation,Columbus, USA, FORGE from Transvalor, Mougins, France, and a combination of PEP (Pre- and Postprocessing Environment for Programmers) developed at IBF and LARSTRAN from LASSO Ingenieurgesellschaft mbH, Leinfelden, Germany have been used. These packages differ in their ease of use and freedom in modelling. A comparison of both usability and results will be made here.
-
-\subsection{DEFORM-3D}
+For the modelling of the described process, different software packages are available. Besides DEFORM3D, both FORGE from Transvalor, Mougins, France, and a combination of PEP (Pre- and Postprocessing Environment for Programmers) developed at IBF and LARSTRAN from LASSO Ingenieurgesellschaft mbH, Leinfelden, Germany have been used to validate the results. The packages differ in their ease of use and freedom in modelling. A comparison of both usability and results will be made here.
 
 \subsection{FORGE}
-FORGE, specifically FORGE3D, from Transvalor is a FEM software package catering primarily to industrial users. This can be seen in the easier to use and rather polished user interface. FORGE, like most packages, is split into a preprocessing tool, an equation system solver, and a postprocessing tool. 
+FORGE, specifically FORGE3D, from Transvalor is a FEM software package catering primarily to industrial users. This can be seen in the easier to use and rather polished user interface. FORGE, like most packages, is split into a preprocessing tool, an equation system solver, and a postprocessing tool.
+
+As a product for industrial customers, FORGE implements a fairly easy to use concept and various functions for simplifying the definition of die movement and kinematics. It provides predefined so-called Presses which, based on a few values such as initial height, final height, number of blows etc., create a basic kinematic for an open die forging process. While this provides an easy way to get results for simple processes, it makes the setup of specific, more advanced processes rather difficult.
+
+While it is possible to define custom presses and use these to model die kinematics, this function is hardly documented in freely available documents such as FORGE's online help system. This, however, leads to defining kinematics via basic linear and rotational movement operations in cases that do not meet the predefined standard processes. Especially in academic surroundings, where processes vary widely, the combination of undocumented functions to define presses and limited freedom to access and modify the process in-process makes adequate process definition difficult.
+
+Similar to the definition of kinematics and movements is the adaption of the available material data for FORGE. While an extensive material data base is available, import of new material data is not well documented. It is, however, possible to derive the data structure from exported files.
+
+In FORGE, the process has been modelled symetrically with symmetry in the x-y and x-z planes. Apart from this, the model represents the real process in matters of die kinematics and work piece movement. That is, the die only moves in z direction while the work piece moves and rotates underneath it.
+
+\subsubsection{Forging Forces}
+
+The resulting forging forces acting on the dies are shown in diagrams \ref{img:forgforce_forge_p1} and \ref{img:forgforce_forge_p2} for passes 1 and 2 and passes 3 and 4 respectively. As is expected, the force required for forging rises with each blow. This can be explained by hardening mechanisms due to the introduced strain. The last blow of each pass requiring less force is due to the smaller bite length in the last blow. In general, forging forces between $1.5\mega\newton$ and $2.0\mega\newton$ seem realistic.
+
+The diagram shows for pass 2 that a problem occurred in modelling. The peaks for the 2nd through 5th blow follow each other immediately, displaying a lack of waiting time in between. A closer examination of this will be seen below.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/force_pass1_forge}
+  \caption{Forging forces for passes 1 and 2 as calculated by FORGE3D}
+  \label{img:forgforce_forge_p1}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/force_pass2_forge}
+  \caption{Forging forces for passes 3 and 4 as calculated by FORGE3D}
+  \label{img:forgforce_forge_p2}
+\end{figure}
+
+\subsubsection{Strain}
+
+The effective strain in the core of the work piece after pass 4 is shown in diagram \ref{img:streff_forge}. A minimum value of 1.4 and a maximum value of 2.1 hint to a decent forging of the core.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/streff_forge}
+  \caption{Effective strain in the core of the work piece after stroke 4 as calculated by FORGE3D}
+  \label{img:streff_forge}
+\end{figure}
+
+\subsubsection{Temperature}
+
+The temperature distribution in the core of the work piece after a cooling period of $120\minute$ is shown in diagram \ref{img:temp_forge}. Here, expectations are met as well by a low temperature at the head of the work piece, a fairly even distribution along its length and a rise in temperature at the end, which has not had any contact with the die.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/temperature_forge}
+  \caption{Temperature distribution along the core after cooling as calculated by FORGE3D}
+  \label{img:temp_forge}
+\end{figure}
+
+Diagram \ref{img:temp_time_forge} shows the temperature devolution of a node $100\milli\meter$ from the head of the work piece in its core. All stages of the process can clearly be seen here.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/temperature_time_forge}
+  \caption{Temperature devolution of a point $100\milli\meter$ from the head in the core of the work piece as calculated by FORGE3D}
+  \label{img:temp_time_forge}
+\end{figure}
+
 
 \subsection{PEP/LARSTRAN}
+
+PEP/LARSTRAN is a combination of one pre- and postprocessing tool (PEP) and one solver (LARSTRAN). Both have been developed in an academic surrounding and accordingly provide more access to process variables during processing. On the other hand, a deeper understanding of FEM is necessary to use the system since values such as time step length and mesh element edge length are not calculated automatically but rather have to be input by the user.
+
+Kinematics control is done via a so-called model program. Here, die movements, changes in die speed and other process variables are defined to happen at a given time step. While other systems provide the concept of manipulators which exert a certain restore force on the die to prevent unrealistic work piece movement due to singular die contact, PEP/LARSTRAN does not allow for such possibilities. Similar functionality has been achieved by defining a fixing of the work piece based on the number of contact nodes, but certain differences can still arise.
+
+PEP/LARSTRAN die kinematics are based exclusively on the movement of the dies instead of the work piece. Since the concept of model programs does not allow for the definition of die movement according to the current work piece situation, however, it is not possible to even run one forging pass without stopping it and modifying the die movements. Moreover, the systems allows for only one ambient temperature, which means that each heating and cooling process and a combination of two forging passes have to be simulated separately and ambient temperature modified manually.
+
+\subsubsection{Forging Forces}
+
+\subsubsection{Strain}
+
+\subsubsection{Temperature Distribution}
