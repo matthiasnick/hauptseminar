@@ -15,7 +15,7 @@ DRV leads to equilibrium between hardening and softening. However DRX leads to a
  \label{img:warmflowcurves}
 \end{figure}
 
-The softening effect of DRV and therefore the reduced level of stress with increasing strain is based on the rearrangement and annihilation of dislocations [Gottstein]. During DRX new grains are built and grow at spots with low specific energy. Both effects lead to a totally refined microstructure.\par
+The softening effect of DRV and therefore the reduced level of stress with increasing strain is based on the rearrangement and annihilation of dislocations \cite{GOT07}. During DRX new grains are built and grow at spots with low specific energy. Both effects lead to a totally refined microstructure.\par
 
 After hot forming, remaining dislocations can still store a great amount of energy. This energy can be enough to cause static recovery (SRV) or static recrystallization (SRX). These processes take place during heat treatment after warm forming. The softening effects are the same as in DRV or DRX. The driving force drops during SRV and SRX and only when there is enough energy stored, SRV and SRX lead to a fully refined microstructure.\par 
 
@@ -30,7 +30,7 @@ After or parallel to SRV and SRX, grain growth (GG) can take place. The driving 
  \label{img:recovandrecrystwarmforming}
 \end{figure}
 
-The flow curves \ref{img:flowcurves} are essential for the determination of the recrystallization kinetics and the fraction of recrystallized material. Therefore it is the basis for the creation of a microstructure model. At the IBF, flow curves are determined by isothermal compression tests at cylindrical specimens with an eight to diameter ratio of 1,5. For the 1.4301 tests have been carried out at temperatures ranging from $900 - 1250 ^{\circ}C$ and strain rates of $0,05 - 100 s^{-1}$ \ref{img:flowcurves}.
+The flow curves \ref{img:flowcurves} are essential for the determination of the recrystallization kinetics and the fraction of recrystallized material. Therefore it is the basis for the creation of a microstructure model. At the IBF, flow curves are determined by isothermal compression tests at cylindrical specimens with an height to diameter ratio of 1,5. For the 1.4301 tests have been carried out at temperatures ranging from $900 - 1250 ^{\circ}C$ and strain rates of $0,05 - 100 s^{-1}$ \ref{img:flowcurves}.
 
 \begin{figure}[htbp]
  \centering
@@ -62,16 +62,17 @@ They can also be calculated by:
 \end{equation}
 
 \subsection{Semi emprirical material models}
-For the prediction of microstructural evolution semi-empirical models are used for many years. Lohmar and Karhausen gave a detailed overlook over the common models used in warm forming \cite{LOH10}\cite{KAR94}.\par 
+For the prediction of microstructural evolution semi-empirical models are used for many years. Lohmar and Karhausen gave a detailed overlook over the common models used in warm forming \cite{LOH10}\cite{KAR94}.\par
 
-The JMAK-equation is a way to calculate the fraction of recrystallization X \ref{img:JMAK} for the different recrystallization mechanisms DRX and SRX. In this work the equation for the calculation of DRX and SRX published by Dehgan Manshadi is used \cite{DEH08}.
+
+The JMAK-equation is a way to calculate the fraction of recrystallization RX \ref{img:JMAK} for the different recrystallization mechanisms DRX and SRX. In this work the equation for the calculation of DRX and SRX published by Dehgan Manshadi is used \cite{DEH08}.
 
 \begin{equation}
- X = 1 - exp\left( log\left( 1-0,95\right) \cdot\left( \frac{\varepsilon_{eff}-\varepsilon_{c}}{\varepsilon_{x}}\right) ^{1,3}\right)
+ X_{DRX} = 1 - exp\left( log\left( 1-0,95\right) \cdot\left( \frac{\varepsilon_{eff}-\varepsilon_{c}}{\varepsilon_{x}}\right) ^{1,3}\right)
 \end{equation}
 
 \begin{equation}
- X = 1 - exp\left( log\left( 1-0,5\right) \cdot\left( \frac{t_{SRX}}{t_{50}}\right) ^{1,1}\right)
+ X_{SRX} = 1 - exp\left( log\left( 1-0,5\right) \cdot\left( \frac{t_{SRX}}{t_{50}}\right) ^{1,1}\right)
 \end{equation}
 
 Where $t_{50}$ is the time where 50\% recrystallization took place \ref{img:JMAK}:
