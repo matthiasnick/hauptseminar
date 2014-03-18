@@ -2,31 +2,118 @@
 
 For the modelling of the described process, different software packages are available. Besides DEFORM3D, both FORGE from Transvalor, Mougins, France, and a combination of PEP (Pre- and Postprocessing Environment for Programmers) developed at IBF and LARSTRAN from LASSO Ingenieurgesellschaft mbH, Leinfelden, Germany have been used to validate the results. The packages differ in their ease of use and freedom in modelling. A comparison of both usability and results will be made here.
 
-\subsection{FORGE}
-FORGE, specifically FORGE3D, from Transvalor is a FEM software package catering primarily to industrial users. This can be seen in the easier to use and rather polished user interface. FORGE, like most packages, is split into a preprocessing tool, an equation system solver, and a postprocessing tool.
+\subsection{DEFORM}
+Based on the finite element method DEFORM is a tool for the prediction of material flow and thermal behavior in forming processes. Several deformation modes are given by the software package (forging, rolling, extrusion, upsetting, cogging, etc.).  The system provides different material models (rigid, plastic, rigid-plastic), forming equipment (hydraulic presses, hammers, screw presses) and the possibility of setting individual boundary conditions (friction, thermal). The DEFORM postprocessor offers the option of contour plots, stroke prediction, point tracking and other features \cite{deform}. In this work the Cogging deformation mode is used. For the process conditions see chapter \ref{sec:model_process}.
 
-As a product for industrial customers, FORGE implements a fairly easy to use concept and various functions for simplifying the definition of die movement and kinematics. It provides predefined so-called Presses which, based on a few values such as initial height, final height, number of blows etc., create a basic kinematic for an open die forging process. While this provides an easy way to get results for simple processes, it makes the setup of specific, more advanced processes rather difficult.
+\subsubsection{Forging Forces}
+One of the essential values in cogging operation is the forging force. The forging force is vital to predict the press limits and therefore for the process dimensioning. The forging force is extracted in the postprocessor in form of a process time against die force plot. The graphs show the increasing force during the four passes. The number of bites does vary from pass to pass depending on the bite width. It starts with four bites in the first pass and eight bites in the last one (figures \ref{img:forgforce_deform_p1} and \ref{img:forgforce_deform_p2}). The maximum die force is about $3150\kilo\newton$ and the minimum force is about $1680\kilo\newton$. The differential of these values can be explained of the variety in the pressed surface. Especially in the last stroke not all of the bite length is presses because the $200\milli\meter$ for the manipulator to grab the WP is not forged. The oscillation of the die force can be explained by the forging history of the presses material. The material is not totally homogeneously forged. This effect will be explained later. However in average the die force is about the magnitude which can be calculated roughly by Siebel, $F=2.5\mega\newton$:
+
+\begin{equation}
+F = s_b \cdot b \cdot 1.15 \cdot k_f \left(1+\frac{\mu\cdot s_b}{2\cdot h} + \frac{h}{h\cdot s_b}\right)
+\end{equation}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/force_pass1_deform}
+  \caption{Forging forces for passes 1 and 2 as calculated by DEFORM3D}
+  \label{img:forgforce_deform_p1}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/force_pass2_deform}
+  \caption{Forging forces for passes 3 and 4 as calculated by DEFORM3D}
+  \label{img:forgforce_deform_p2}
+\end{figure}
+
+The characteristic of the die force during a bite (figure \ref{img:forgeforce_deform_single}) is that the die force increases because of strain hardening and area increase with forming stroke up to a maximum. The inconsistent in the die force increasing can be explained by the die instantly getting more contact nodes and therefore an increasing surface to press. The linear force drop after the maximum is affected by the used time step. Normally the die force should drop to zero immediately.
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/force_deform_single}
+  \caption{Forging force in the first blow as calculated by DEFORM3D}
+  \label{img:forgeforce_deform_single}
+\end{figure}
+
+\subsubsection{Strain}
+
+The aim for a well forged ingot is a homogeneous strain distribution in the core. This is necessary for the mechanical properties. To accomplish this it is necessary to determine a forging strategy where there is an offset in between the bites to obtain a homogeneous strain distribution (figure \ref{img:strain_basics}).
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/strain_basics}
+  \caption{Influence of bite-offset on the equivalent strain in the core \cite{skript}}
+  \label{img:strain_basics}
+\end{figure}
+
+The forging strategy is given by the forging simulation program ForgeBase. In figure \ref{img:streff_deform} the effective-strain over the ingot length after the last pass is given. The points of maximal and minimal effective-strain for the coming microstructure analyses are shown as well.
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/streff_deform_withwp}
+  \caption{Effective strain in the core of the work piece after stroke 4 as calculated by DEFORM3D}
+  \label{img:streff_deform}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/streff_deform_colors}
+  \caption{Effective strain in the work piece after stroke 4 as calculated by DEFORM3D}
+  \label{img:streff_deform_colors}
+\end{figure}
+
+\subsubsection{Temperature}
+
+Another crucial value for the quality of the forging process is the temperature progress. For a better formability and the activation of RX-/SRX-kinetics and grain growth the temperature should not drop under a certain level. Therefore a second heat after the second pass is necessary. For the temperature profile during the whole process for a point $100\milli\meter$ from the top of the ingot in the core see figure \ref{img:temp_time_deform}.
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/temperature_time_deform}
+  \caption{Temperature devolution of a point $100\milli\meter$ from the head in the core of the work piece as calculated by DEFORM3D}
+  \label{img:temp_time_deform}
+\end{figure}
+
+Furthermore, the temperature derivation in the core after the last pass is also of great interest, see figure \ref{img:temp_deform}. At the front of the ingot the temperature is a lot lower than in the rest of the ingot because of the heat flux over the front surface. Through the ingot the temperature is getting to a nearly constant level of ca. $1070\celsius$. To the end of the forged ingot length the temperature rises again due to the greater not formed volume.
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/temperature_deform_withwp}
+  \caption{Temperature distribution along the core after cooling as calculated by DEFORM3D}
+  \label{img:temp_deform}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/temperature_deform_colors}
+  \caption{Temperature distribution along the core after cooling as calculated by DEFORM3D}
+  \label{img:temp_deform_colors}
+\end{figure}
+
+\subsection{FORGE}
+FORGE, specifically FORGE3D, from Transvalor, primarily targets industrial users. It therefore resembles DEFORM in functionality and ease of use.
+
+FORGE provides predefined so-called Presses which, based on a few values such as initial height, final height, number of blows etc., create a basic kinematic for an open die forging process. While this provides an easy way to get results for simple processes, it makes the setup of specific, more advanced processes rather difficult.
 
 While it is possible to define custom presses and use these to model die kinematics, this function is hardly documented in freely available documents such as FORGE's online help system. This, however, leads to defining kinematics via basic linear and rotational movement operations in cases that do not meet the predefined standard processes. Especially in academic surroundings, where processes vary widely, the combination of undocumented functions to define presses and limited freedom to access and modify the process in-process makes adequate process definition difficult.
 
-Similar to the definition of kinematics and movements is the adaption of the available material data for FORGE. While an extensive material data base is available, import of new material data is not well documented. It is, however, possible to derive the data structure from exported files.
+Similar to the definition of kinematics and movements is the adaption of the available material data for FORGE. While an extensive material data base is available, import of new material data is not well documented.
 
 In FORGE, the process has been modelled symetrically with symmetry in the x-y and x-z planes. Apart from this, the model represents the real process in matters of die kinematics and work piece movement. That is, the die only moves in z direction while the work piece moves and rotates underneath it.
 
 \subsubsection{Forging Forces}
 
-The resulting forging forces acting on the dies are shown in diagrams \ref{img:forgforce_forge_p1} and \ref{img:forgforce_forge_p2} for passes 1 and 2 and passes 3 and 4 respectively. As is expected, the force required for forging rises with each blow. This can be explained by hardening mechanisms due to the introduced strain. The last blow of each pass requiring less force is due to the smaller bite length in the last blow. In general, forging forces between $1.5\mega\newton$ and $2.0\mega\newton$ seem realistic.
+The forging forces are shown in diagrams \ref{img:forgforce_forge_p1} and \ref{img:forgforce_forge_p2} for passes 1 and 2 and passes 3 and 4 respectively. As is expected, the force required for forging rises with each blow. In general, forging forces between $1.5\mega\newton$ and $2.0\mega\newton$ seem realistic, based on the calculations from Siebel's formula.
 
-The diagram shows for pass 2 that a problem occurred in modelling. The peaks for the 2nd through 5th blow follow each other immediately, displaying a lack of waiting time in between. A closer examination of this will be seen below.
+The diagram shows that a problem occurred in modelling pass 2. The peaks for the 2nd through 5th blow follow each other immediately, displaying a lack of waiting time in between. A closer examination of this will be seen below.
 
-\begin{figure}[htbp]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=0.9\textwidth]{diagrams/force_pass1_forge}
   \caption{Forging forces for passes 1 and 2 as calculated by FORGE3D}
   \label{img:forgforce_forge_p1}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=0.9\textwidth]{diagrams/force_pass2_forge}
   \caption{Forging forces for passes 3 and 4 as calculated by FORGE3D}
@@ -35,9 +122,9 @@ The diagram shows for pass 2 that a problem occurred in modelling. The peaks for
 
 \subsubsection{Strain}
 
-The effective strain in the core of the work piece after pass 4 is shown in diagram \ref{img:streff_forge}. A minimum value of 1.4 and a maximum value of 2.1 hint to a decent forging of the core.
+The effective strain in the core of the work piece after pass 4 is shown in diagram \ref{img:streff_forge}. A minimum value of 1.4 and a maximum value of 2.1 hint to a good forging of the core.
 
-\begin{figure}[htbp]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=0.9\textwidth]{diagrams/streff_forge}
   \caption{Effective strain in the core of the work piece after stroke 4 as calculated by FORGE3D}
@@ -48,7 +135,7 @@ The effective strain in the core of the work piece after pass 4 is shown in diag
 
 The temperature distribution in the core of the work piece after a cooling period of $120\minute$ is shown in diagram \ref{img:temp_forge}. Here, expectations are met as well by a low temperature at the head of the work piece, a fairly even distribution along its length and a rise in temperature at the end, which has not had any contact with the die.
 
-\begin{figure}[htbp]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=0.9\textwidth]{diagrams/temperature_forge}
   \caption{Temperature distribution along the core after cooling as calculated by FORGE3D}
@@ -57,7 +144,7 @@ The temperature distribution in the core of the work piece after a cooling perio
 
 Diagram \ref{img:temp_time_forge} shows the temperature devolution of a node $100\milli\meter$ from the head of the work piece in its core. All stages of the process can clearly be seen here.
 
-\begin{figure}[htbp]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=0.9\textwidth]{diagrams/temperature_time_forge}
   \caption{Temperature devolution of a point $100\milli\meter$ from the head in the core of the work piece as calculated by FORGE3D}
@@ -75,6 +162,106 @@ PEP/LARSTRAN die kinematics are based exclusively on the movement of the dies in
 
 \subsubsection{Forging Forces}
 
+The forging forces acting on the dies are shown in diagrams \ref{img:forgforce_pep_p1} and \ref{img:forgforce_pep_p2} for passes 1 and 2 and passes 3 and 4 respectively. Fitting the expectation, forces generally rise with an increasing number of blows due to strain hardening and material cooling. The last blow of each pass results in a smaller peak due to a shorter bite length in the last blow.
+
+The forging force in the first blow of the second pass is considerably higher than that of the following blows. An explanation for this is an error in positioning the die for this blow, resulting in the die having contact with the work piece along its entire length, creating a larger contact area and, by that, a larger forging force.
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/force_pass1_pep}
+  \caption{Forging forces for passes 1 and 2 as calculated by PEP/LARSTRAN}
+  \label{img:forgforce_pep_p1}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/force_pass2_pep}
+  \caption{Forging forces for passes 3 and 4 as calculated by PEP/LARSTRAN}
+  \label{img:forgforce_pep_p2}
+\end{figure}
+
+
 \subsubsection{Strain}
 
-\subsubsection{Temperature Distribution}
+The effective strain in the core of the work piece after pass 4 is shown in diagram \ref{img:streff_pep}. The values range between 0.4 and 1.4, which does not meet expectations. This could, however, be due to a mistake in modelling the second heating phase, which will be explained below.
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/streff_pep}
+  \caption{Effective strain in the core of the work piece after stroke 4 as calculated by PEP/LARSTRAN}
+  \label{img:streff_pep}
+\end{figure}
+
+\subsubsection{Temperature}
+
+The temperature devolution of a node $100\milli\meter$ from the head of the work piece is shown in diagram \ref{img:temp_time_pep}. Here, it can be seen that the heating time for the second heating phase has not been reached, being only $360\second$ instead of $3600\second$. Since tracking of nodal data is extremely strenuous and time-consuming in PEP's post-processing tool, only the first 100 steps of the third pass have been extracted, making up for only $17\second$.
+
+Due to this difference in heating between the models, comparison of PEP/LARSTRAN's results of the temperature distribution at the end of the fourth pass does not seem useful.
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/temperature_time_pep}
+  \caption{Temperature devolution of a point $100\milli\meter$ from the head in the core of the work piece as calculated by PEP/LARSTRAN}
+  \label{img:temp_time_pep}
+\end{figure}
+
+
+\subsection{Comparison of results}
+
+\subsubsection{Forging forces}
+
+The resulting forging forces in all three systems are shown in diagram \ref{img:forgforce_comp_p1} for passes 1 and 2 and in diagram \ref{img:forgforce_comp_p2} for passes 3 and 4. One obvious difference is in the time between passes 1 and 2 and passes 3 and 4 respectively. While in DEFORM, no waiting period has been implemented, in FORGE and PEP/LARSTRAN, $45\second$ have been introduced.
+
+Another obvious difference is in the number of blows. While in DEFORM, passes 1 and 2 combine to 9 blows, in FORGE and PEP/LARSTRAN, there are 11 blows. Passes 3 and 4 show similar results. This can be explained by different lengthening of the work piece during forging, possibly stemming from different friction models or contact definitions. Another reason, at least for PEP/LARSTRAN, could be that the work piece moves along its length during forging. Since PEP/LARSTRAN does not allow for in-process adaption to these movements, they may lead to shorter de-facto bite lengths and, finally, to more blows.
+
+The forging forces are considerably higher in DEFORM than in FORGE and in PEP/LARSTRAN. While no explanation has been found for this, the consistency along the four passes hints to differences in material values or in the solvers.
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/force_pass1_comp}
+  \caption{Comparison of forging forces for passes 1 and 2}
+  \label{img:forgforce_comp_p1}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/force_pass2_comp}
+  \caption{Comparison of forging forces for passes 3 and 4}
+  \label{img:forgforce_comp_p2}
+\end{figure}
+
+
+\subsubsection{Effective strain}
+
+The results for the effective strain in the core are compared in diagram \ref{img:streff_comp}. While the result from PEP/LARSTRAN should not be regarded due to the difference in heating time, it is obvious that the results from FORGE are considerably higher than those from DEFORM. This, again, might be due to differences in the use of the material data. However, the general shape of the strain distribution is fairly similar.
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/streff_comp}
+  \caption{Comparison of the effective strain in the core of the work piece}
+  \label{img:streff_comp}
+\end{figure}
+
+
+\subsubsection{Temperature}
+
+The temperature distribution after the fourth pass is shown in diagram \ref{img:temp_comp} for DEFORM and FORGE. Results from PEP/LARSTRAN are not shown due to the shorter heating period. Diagram \ref{img:temp_time_forge} shows the temperature devolution of a node $100\milli\meter$ from the head of the work piece in its core.
+
+Slower heating, a smaller drop in temperature and slower cooling that show in the results from FORGE would suggest a difference in either specific heat or heat conductivity. However, the same values have been used in both systems, so system-specific differences seem to be the cause for this difference. The results for PEP/LARSTRAN, where they can be compared to those from DEFORM and from FORGE, show a steeper rise in temperature during heating. During forging, the drop of the temperature is less steep when compared to the results from DEFORM and the drop is larger when compared to those from FORGE.
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/temperature_comp}
+  \caption{Comparison of the temperature distribution along the core after the fourth pass}
+  \label{img:temp_comp}
+\end{figure}
+
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrams/temperature_time_comp}
+  \caption{Comparison of the temperature devolution of a point $100\milli\meter$ from the head in the core of the work piece}
+  \label{img:temp_time_comp}
+\end{figure}
+
+\clearpage

@@ -15,6 +15,7 @@
 \usepackage{SIunits}
 \usepackage{amsopn}
 \usepackage[percent]{overpic}
+\usepackage{newclude}
 
 \setlength{\parskip}{6pt}
 \setlength{\parindent}{0pt}
@@ -62,22 +63,20 @@
 \begin{document}
 
 \include{title}
+\setcounter{tocdepth}{2}
 \tableofcontents
 
 \pagebreak
 
 \include{introduction}
 \include{fundamentals}
-%\include{theory}
 \include{model_process}
-\include{previous_work}
 \include{material_modelling}
 \include{validation_results}
-%\include{cadconcept}
+\include{microstructure_results}
 \include{summary}
 \include{outlook}
-%\appendix
-%\include{usedsymbols}
+\newpage
 \listoffigures
 \newpage
 \bibliographystyle{alphadin}
